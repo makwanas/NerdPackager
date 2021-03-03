@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import Search from './components/Search.js';
+import About from './components/About.js';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import queryString from 'query-string';
+
+
+function useQueryString() {
+  return queryString.parse(useLocation().search);
+}
 
 function App() {
+  console.log("Checking in APP.js", useQueryString().q)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hmm...I wonder what the forecast is?</h1>
+      <Switch>
+        <Route path="/search">
+          <Search query={useQueryString().q} />
+        </Route>
+        <Route exact path="/about">
+          <About />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/search" />
+        </Route>
+      </Switch>
     </div>
   );
 }
