@@ -1,6 +1,11 @@
+/*
+JS file for displaying card for single day weather data 
+*/
+
+//Importing dependencies
 import { getWeatherIcon, ConvertDate, formatProbPrec } from './Search';
 
-
+//DOM rendering for card
 function DayForecast(props) {
     return (
         <div>

@@ -1,9 +1,15 @@
+/* 
+JS file for formatting the weekly weather data in an array to individual daily cards
+*/
+
+//Importing dependencies
 import { render } from '@testing-library/react';
 import DayForecast from './DayForecast';
 
+//Function to return separate array of indices for elements in the weekly response data
 function WeeklyForecast(props) {
-    console.log("Inside Weekly forecast", props.dailyDetails);
-    const arrayLength = props.dailyDetails.date.length - 1;
+    //console.log("Inside Weekly forecast", props.weeklyDetails);
+    const arrayLength = props.weeklyDetails.date.length - 1;
 
     const createIndexArray = (arrayLength) => {
         var i = 0
@@ -15,11 +21,13 @@ function WeeklyForecast(props) {
         return indexedArray
     }
 
+    //store that separate array of indices as referenceIndexArray 
     const referenceIndexArray = createIndexArray(arrayLength);
 
+    //create a card for each of the elements in the referenceIndexArray
     return (
         <div>
-            {referenceIndexArray.map(index => <DayForecast key={props.dailyDetails.date[index]} timezone={props.timezone} date={props.dailyDetails.date[index]} high={props.dailyDetails.high[index]} low={props.dailyDetails.low[index]} probPrec={props.dailyDetails.probPrec[index]} description={props.dailyDetails.description[index]} weatherIcon={props.dailyDetails.weatherIcon[index]} />)}
+            {referenceIndexArray.map(index => <DayForecast key={props.weeklyDetails.date[index]} timezone={props.timezone} date={props.weeklyDetails.date[index]} high={props.weeklyDetails.high[index]} low={props.weeklyDetails.low[index]} probPrec={props.weeklyDetails.probPrec[index]} description={props.weeklyDetails.description[index]} weatherIcon={props.weeklyDetails.weatherIcon[index]} />)}
         </div>
     )
 }
