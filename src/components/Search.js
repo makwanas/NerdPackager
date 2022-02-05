@@ -189,8 +189,11 @@ const Search = ({ query }) => {
                     //append the URL path with input query search term
                     history.push(`?q=${inputQuery}`);
                 }}>
+                    <label>
+                        Enter your location:
                     <input value={inputQuery} onChange={e => setInputQuery(e.target.value)} />
                     <button type="submit">Submit</button>
+                    </label>
                 </form>
                 <br />
                 {/* {coordinates1.latitude != "" && <Map latitude={coordinates1.latitude} longitude={coordinates1.longitude} />} */}
