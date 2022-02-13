@@ -6,12 +6,15 @@ import IndividualMood from './IndividualMood';
 import MoodResults from './MoodResults';
 import { Link } from 'react-router-dom';
 import { css } from '@emotion/react';
+import { searchStyles } from '../Keyword/SearchKeyword';
 
 const ConditionMoodStyles = css`
-    border: 2px solid black;
+    border: 1px solid white;
+    border-radius: 5px;
     margin-top:10px;
     margin-left:10px;
     width: 500px;
+    padding-bottom:10px;
 `;
 
 const MoodStyles = css`
@@ -39,8 +42,9 @@ function SearchMood() {
     console.log("Value of display mood:", displayMood, displayMoodResults);
 
     return (
-        <div >
-            <h1> This is the Search mood page</h1>
+        <div css ={searchStyles}>
+            <h2> Search mood page</h2>
+            <Link exact to="/redditSimplified"><button>Back to RedditSimplified</button></Link>
             <div css={ConditionMoodStyles}>
                 <Condition type="mood" filterOption={filterOption} onFilterChange={setFilterOption} limitOption={limitOption} onLimitChange={setLimitOption} />
             </div>
@@ -58,7 +62,13 @@ function SearchMood() {
                         url={moodData[index].subreddit_url} />)}</div>
                 :
                 <>
-                    <Link to="/redditSimplified/mood"><button onClick={handleDisplayCards}>Back to mood page</button></Link>
+                    <Link to="/redditSimplified/mood">
+                        <button onClick={handleDisplayCards} css ={{
+                            marginTop:'10px'
+                        }}>
+                            Back to mood page
+                        </button>
+                    </Link>
                     {displayMoodResults != '' && <MoodResults displayMoodResults={displayMoodResults} filterOption={filterOption} limitOption={limitOption} />}
                 </>}
         </div>

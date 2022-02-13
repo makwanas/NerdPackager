@@ -26,7 +26,7 @@ export function useQueryString() {
 }
 
 const AppStyles = css`
-height: 100%;
+height: 100vh;
 display: flex;
 flex-direction: column;
 flex-wrap: nowrap;
@@ -34,7 +34,7 @@ flex-wrap: nowrap;
 
 const ContentStyles = css`
 flex: 1;
-overflow: auto;
+background-image: url("./images/textured-background.jpg");
 `;
 
 //Rendering App DOM and definining routes for navigation
@@ -44,7 +44,7 @@ function App() {
       <Navbar />
       <div css = {ContentStyles}>
         <Switch>
-          <Route path="/search">
+          <Route path="/weatherInfo">
             <Search query={useQueryString().q} />
           </Route>
           <Route exact path="/about">
@@ -66,7 +66,7 @@ function App() {
             <GitViewHome />
           </Route>
           <Route exact path="/">
-            <Redirect to="/search" />
+            <Redirect to="/redditSimplified" />
           </Route>
         </Switch>
       </div>

@@ -1,24 +1,41 @@
+/** @jsxImportSource @emotion/react */
+
 import React from 'react';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 const Avatar = styled.img`
-  max-height: 40px;
-  margin-right: 10px;
+  max-height: 300px;
+  border-radius: 50%;
 `;
 
-const Name = styled.h1`
-  display: inline-block;
-  margin: 0;
-  font-size: 50px;
+const userHeaderStyles = css`
+  padding-bottom: 5px;
+  border-bottom : 0.1px solid #CACFD2;
+`;
+
+const userNameStyles = css`
+h1{
+  text-align: center;
+  margin :0;
+}
+a{
+  text-decoration: none;
+  font-size: 20px;
+  color: #CACFD2;
+}
 `;
 
 function UserHeader({ login, user }) {
   return (
-    <div>
-      <a href={user.url}>
-        <Avatar src={user.avatarUrl} alt={login} />
-        <Name>{user.name}</Name>
-      </a>
+    <div css ={userHeaderStyles}>
+      <Avatar src={user.avatarUrl} alt={login} />
+      <div css ={userNameStyles}>
+        <h1>{user.name}</h1>
+        <a href={user.url}>
+          {user.login}
+        </a>
+      </div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 const InputConditionStyles = css`
 margin-top: 10px;
 margin-left: 15px;
+color: #CACFD2;
 `;
 
 const SelectionConditionStyles = css`
@@ -33,7 +34,9 @@ function Condition(props) {
             </div >
             <div css={InputConditionStyles}>
                 Number of posts:
-                <select onChange={handleLimitChange}>
+                <select onChange={handleLimitChange} css ={{
+                    marginLeft: "10px"
+                }}>
                     <option value="25">25</option>
                     <option value="50">50</option>
                     <option value="100">100</option>

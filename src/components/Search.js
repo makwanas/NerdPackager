@@ -1,14 +1,19 @@
+/** @jsxImportSource @emotion/react */
 /*
 Search component file containing helper functions, custom React hook components and rendering daily and weekly weather data
 */
 
 // Importing dependencies
 import { useState, useEffect } from 'react';
+import { css } from '@emotion/react';
 import { useHistory } from 'react-router-dom';
 import fetch from 'isomorphic-unfetch';
 import WeeklyForecast from './WeeklyForecast';
 import Map from './Map';
 import '../styling/Search.css';
+//import { formStyles } from './GitView/GitViewHome'; 
+import {BsCloudRain} from 'react-icons/bs';
+import {FaTemperatureHigh, FaTemperatureLow} from 'react-icons/fa';
 
 //Function to return weather icon URL
 export const getWeatherIcon = (icon) => {
@@ -57,6 +62,117 @@ const getDailyDetails = (dailyArray, dailyAttribute) => {
     }
     return outputArray
 }
+
+const searchStyles = css`
+    color: white;
+`;
+
+const formStyles = css`
+form{
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    label{
+        font-size: 20px;
+        padding: 10px;
+        border: 1px solid white;
+        margin-top: 10px;
+        border-radius: 5px;
+        input{
+            margin-left: 5px;
+            margin-right: 5px;
+            font-size: 20px;
+            border-radius: 1px;
+        }
+        button{
+            font-size: 20px;
+            color: white;
+            background-color: #313131;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+    }
+
+}
+width: fit-content;
+margin: 0 auto;
+`;
+
+const dailyForecastStyles = css`
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #CACFD2;
+    border-radius: 15px;
+    padding:10px;
+    width: fit-content;
+    margin-left: 75px;
+`;
+
+const dailyForecastDetailStyles = css `
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    border-left: 0.2px solid #CACFD2;
+    padding-left: 10px;
+    h2{
+        margin:0;
+        font-size: 24px;
+    }
+
+`;
+
+const coordinateStyles = css `
+    display :flex;
+    flex-direction: row;
+    p{
+        font-style: italic;
+        font-size: 12px;
+        color: #CACFD2;
+        padding-left: 10px;
+    }
+`;
+
+const temperatureStyles = css`
+    display :flex;
+    flex-direction: row;
+`
+
+const weatherDescriptionStyles = css `
+    margin : 0 auto;
+    text-align: center;
+    h3{
+        margin: 0;
+        color: #CACFD2;
+    }
+    padding-bottom: 5px;
+    border-bottom: 0.2px solid #CACFD2;
+`;
+
+const precipitationStyles = css`
+    display: flex;
+    flex-direction: row;
+    p{
+        margin :0;
+        padding-top: 10px;
+        padding-left: 10px;
+        font-size: 16px;
+        color: #CACFD2;
+    }
+    
+`;
+
+const maxTemperatureStyles = css `
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+`;
+
+const minTemperatureStyles = css `
+    display: flex;
+    flex-direction: row;
+    flex: 1
+`;
+
 
 //Custom React hook for getting coordinates from search query
 function useLocationString(query) {
@@ -180,14 +296,20 @@ const Search = ({ query }) => {
         }
     }
 
+    console.log("Inside search component: ", weeklyDetails);
+
     //rendering the component here in return function
     return (
-        <div>
-            <div>
-                <form onSubmit={(e) => {
-                    e.preventDefault();
-                    //append the URL path with input query search term
-                    history.push(`?q=${inputQuery}`);
+        <div css ={searchStyles}>
+            <div css ={formStyles}>
+                <form
+                    css = {{
+                        width: ''
+                    }} 
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        //append the URL path with input query search term
+                        history.push(`?q=${inputQuery}`);
                 }}>
                     <label>
                         Enter your location:
@@ -196,28 +318,96 @@ const Search = ({ query }) => {
                     </label>
                 </form>
                 <br />
-                {/* {coordinates1.latitude != "" && <Map latitude={coordinates1.latitude} longitude={coordinates1.longitude} />} */}
                 {/* Load Error if any*/
                 isError && <h1>Error message!</h1>
                 }
-                {isLoading ? (<h1>Loading...</h1>) : (<div>
-                    {checkCoordinates.latitude != "" && <div>
-                        <Map latitude={checkCoordinates.latitude} longitude={checkCoordinates.longitude} />
-                        <h1>Location: {formatLocation(checkLocationDetails.city, checkLocationDetails.state, checkLocationDetails.country)}</h1><ul><li>Latitude: {checkCoordinates.latitude}</li><li>Longitude: {checkCoordinates.longitude}</li></ul></div>}
-                    {dailyDetails.high != "" && <div>
-                        <h2>Current date: {ConvertDate(weatherData.current.dt, weatherData.timezone)}</h2>
-                        <h3>Daily details: </h3>
-                        <ul>
-                            <li>Maximum temperature: {dailyDetails.high} F</li>
-                            <li>Minimum temperature: {dailyDetails.low} F</li>
-                            <li>Propability of precipitation: {formatProbPrec(dailyDetails.probPrec)} %</li>
-                            <li>Weather Description: {dailyDetails.description} </li>
-                            <li> Weather icon:
-                            <br />
-                                <img src={getWeatherIcon(dailyDetails.weatherIcon, "dt")} /></li>
-                        </ul>
-                        <WeeklyForecast weeklyDetails={weeklyDetails} timeZone={weatherData.timezone} />
-                    </div>}
+                {isLoading ? (<h1>Loading...</h1>) : 
+                (<div>
+                    <div >
+                        <div>
+                        {checkCoordinates.latitude != "" && 
+                            <div css ={dailyForecastStyles}>
+                            <Map latitude={checkCoordinates.latitude} longitude={checkCoordinates.longitude} />
+                            <div css ={dailyForecastDetailStyles}>
+                                <div css = {{
+                                    borderBottom: '0.2px solid #CACFD2'
+                                }}>
+                                    <h2>
+                                        {formatLocation(checkLocationDetails.city, checkLocationDetails.state, checkLocationDetails.country)}
+                                    </h2>
+                                    <div css ={coordinateStyles}>
+                                        <p>Latitude: {checkCoordinates.latitude}</p>
+                                        <p>Longitude: {checkCoordinates.longitude}</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    {dailyDetails.high != "" &&
+                                        <div>
+                                            <div css = {weatherDescriptionStyles}>
+                                            <h3>{ConvertDate(weatherData.current.dt, weatherData.timezone)}</h3>
+                                            <img src={getWeatherIcon(dailyDetails.weatherIcon, "dt")} />
+                                            <h3>{dailyDetails.description}</h3>
+                                            </div>
+                                            <div css ={precipitationStyles}>
+                                                <BsCloudRain css ={{
+                                                    height: '20px',
+                                                    width: '20px',
+                                                    paddingTop: '10px',
+                                                    paddingLeft: '10px'
+                                                }}/>
+                                                <p>Precipitation chance : {formatProbPrec(dailyDetails.probPrec)} %</p>
+                                            </div>
+                                            <div css={temperatureStyles}>
+                                                <div css = {maxTemperatureStyles}>
+                                                    <FaTemperatureHigh css ={{
+                                                    height: '20px',
+                                                    width: '20px',
+                                                    paddingTop: '10px',
+                                                    paddingLeft: '10px'
+                                                }}/>
+                                                    <p css = {{
+                                                        margin : '0',
+                                                        paddingTop: '10px',
+                                                        paddingLeft: '10px',
+                                                        fontSize: '14px',
+                                                        color: '#CACFD2',
+                                                    }}>
+                                                        Max : {dailyDetails.high} &#8457;
+                                                        </p>
+                                                </div>
+                                                <div css = {minTemperatureStyles}>
+                                                    <FaTemperatureLow css ={{
+                                                    height: '20px',
+                                                    width: '20px',
+                                                    paddingTop: '10px',
+                                                    paddingLeft: '10px'
+                                                }}/>
+                                                    <p css = {{
+                                                        margin : '0',
+                                                        paddingTop: '10px',
+                                                        paddingLeft: '10px',
+                                                        fontSize: '14px',
+                                                        color: '#CACFD2',
+                                                    }}>
+                                                        Min : {dailyDetails.low} &#8457;
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>}
+                                </div>
+                            </div>
+                            </div>}
+                        </div>
+                        
+                    </div>
+                    <div>
+                        {
+                            weeklyDetails && weeklyDetails.date.length !== 0 ?  
+                                <WeeklyForecast weeklyDetails={weeklyDetails} timeZone={weatherData.timezone} />:
+                                <div> </div>
+                        }
+                        
+                    </div>
                 </div>)}
             </div>
         </div>

@@ -1,5 +1,17 @@
+/** @jsxImportSource @emotion/react */
+
 import { useState, useEffect } from 'react';
 import IndividualResult from "./IndividualResult";
+import { css } from '@emotion/react';
+
+const searchResultsStyle = css`
+    color: white;
+    h1{
+        margin: 0;
+        font-size: 24px;
+        padding-top: 15px;
+    }
+`;
 
 function SearchResults(props) {
     const createIndexArray = (arrayLength) => {
@@ -29,9 +41,16 @@ function SearchResults(props) {
     }, [props.results])
 
     return (
-        <div>
-            <h1>This is the Search Results page for: {props.query}</h1>
+        <div css ={searchResultsStyle}>
+            <h1>Search Results page for: {props.query}</h1>
+            <div css ={{
+                display : 'flex',
+                flexDirection:'row',
+                flexWrap:'wrap',
+                margin: '5px'
+            }}>
             {searchDetails.title != [] && referenceIndexArray.map(index => <IndividualResult key={index} index={index} individualSearchDetail={searchDetails} />)}
+            </div>
         </div>
     )
 }

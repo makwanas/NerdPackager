@@ -29,18 +29,20 @@ const useStyles = makeStyles({
 });
 
 const homeStyles = css`
-margin-top:120px;
+margin-top:80px;
 margin-left:200px;
+margin-bottom: 60px;
 img{
     margin-top:40px;
     width:300px;
     height:300px;
+    border-radius: 5px;
 }
 h3{
-    font-size:20px
+    font-size:24px
 }
 p{
-    font-size:14px;
+    font-size:16px;
     font-style:italic;
 }
 a{
@@ -73,7 +75,7 @@ function RedditHome() {
             }}>
                     <img src="https://assets.entrepreneur.com/content/3x2/2000/20180301190808-reddit-logo.jpeg" />
                     <h3>Search by subreddit</h3>
-                    <p>Got any favourite, specific subreddit you would like to visit?</p>
+                    <p>Got any favourite, specific subreddit from this world you would like to visit?</p>
                 </Button>
             </Link>
             <Link to="redditSimplified/mood">

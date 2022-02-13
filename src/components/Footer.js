@@ -8,7 +8,7 @@ import { css } from '@emotion/react';
 //Footer Styles
 
 const FooterStyles = css `
-background-color: black;
+background-color: #313131;
 height: 25px;
 text-align: end;
 padding-bottom: 15px;

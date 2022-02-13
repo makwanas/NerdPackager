@@ -13,12 +13,14 @@ const Name = styled.h1`
 `;
 
 function UserHeader({ login, user }) {
+  console.log("Inside user header:", user);
   return (
     <div>
       <a href={user.html_url}>
         <Avatar src={user.avatar_url} alt={login} />
         <Name>{user.name}</Name>
       </a>
+      <p>{user.login}</p>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import SearchResults from '../SearchResults';
 import Condition from '../Condition';
 import { css } from '@emotion/react';
 import { searchStyles } from '../Keyword/SearchKeyword';
+import { Link } from 'react-router-dom';
 
 export const useSearchSubreddit = (query, filterOption, limitOption) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -56,6 +57,7 @@ function SearchSubreddit({ query }) {
 
         <div css={searchStyles}>
             <h2>Search Subreddit page</h2>
+            <Link exact to="/redditSimplified"><button>Back to RedditSimplified</button></Link>
             <form onSubmit={(e) => {
                 e.preventDefault();
                 history.push(`?q=${inputQuery}`);

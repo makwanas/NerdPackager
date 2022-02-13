@@ -1,4 +1,5 @@
 /* Map div height*/
 #mapid {
-  height: 180px;
+  height: 100px;
+  border-radius: 15px;
 }

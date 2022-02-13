@@ -7,8 +7,8 @@ export const individualMoodStyles = css`
     
     button{
         background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
-        height:400px;
-        width:320px;
+        height:350px;
+        width:300px;
         color:#F7F9F9;
     }
     button:hover{
@@ -17,8 +17,8 @@ export const individualMoodStyles = css`
         color:black;
     }
     img{
-        height:220px;
-        width:220px;
+        height:150px;
+        width:150px;
         margin-top:10px
     }
     border: 2px solid black;

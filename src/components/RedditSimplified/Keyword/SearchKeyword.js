@@ -10,32 +10,40 @@ import { css } from '@emotion/react';
 
 export const searchStyles = css`
 margin-left: 20px;
-    button{
-        border-radius:12px;
+h2{
+    color: white;
+}
+button{
+    border-radius:10px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px;
+}
+form{
+    margin-top:10px;
+    padding-bottom:10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding-top: 5px;
+    width: 500px;
+    label{
+        font-size: 18px;
+        margin-left:10px;
+        color: #CACFD2;
+    }
+    input{
+        margin-top:5px;
+        margin-left:5px;
         font-size: 16px;
+    }
+    button{
+        font-size:20px;
+        background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
         cursor: pointer;
+        margin-left:415px;
+        border-radius: 8px;
     }
-    form{
-        margin-top:10px;
-        border: 3px solid black;
-        width: 500px;
-        label{
-            font-size: 18px;
-            margin-left:10px;
-        }
-        input{
-            margin-top:5px;
-            font-size: 16px;
-        }
-        button{
-            font-size:20px;
-            background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
-            border: 2px solid black;
-            cursor: pointer;
-            margin-left:415px;
-            border-radius: 8px;
-        }
-    }
+}
 `;
 
 function SearchKeyword({ query }) {
